@@ -1,0 +1,118 @@
+# Utiliser sa propre fenetre ?
+own_window yes
+
+# Type de fenetre : normal, desktop, dock ou override
+own_window_type override
+
+# Pseudo transparence (yes/no) et options: undecorated,below,above,sticky,skip_taskbar/pager
+ own_window_transparent yes
+ own_window_hints undecorated,below,skip_taskbar,skip_pager,
+
+# Utiliser Xft (polices lissées etc)
+use_xft yes
+
+# Police a utiliser : use_xft doit etre a "yes"
+xftfont roboto:style=light:size=8
+xftalpha 1
+
+# Taux de raffraichissement de la fenetre (en secondes)
+update_interval 1
+
+# Nombres de rafraichissement avant fermeture : 0 pour infini
+total_run_times 0
+
+# Emplacement top_right ou tr, middle_right ou mr, bottom_right ou br. Donc: tl, tr, tm, bl, br, bm, ml, mr.
+alignment bottom_left
+
+# Largeur maximum
+maximum_width 220
+# Taille minimum de la fenetre, largeur puis hauteur
+minimum_size 500 450
+
+# Ecart avec le bord: x= gauche/droit y= haut/bas
+gap_x 30
+# gap_y 80
+
+# Afficher les ombres?
+draw_shades no
+
+# Afficher des contours ?
+draw_outline no
+
+# Contours autour des blocs de texte?
+draw_borders no
+
+# Contours en trait-tillés, longueur d'un trait en pixels
+stippled_borders 8
+
+# Largeur du contour
+border_width 1
+
+# Couleurs par defaut
+default_color grey
+default_shade_color black
+default_outline_color black
+color1 black
+
+# Pour eviter le clignotement
+double_buffer yes
+
+# Augmente la taille du buffer de 128k a 1024k
+#text_buffer_size 1024
+
+# Soustraire les mémoires tampons de la mémoire utiliser ?
+no_buffers yes
+
+# Tout le texte en majuscule ?
+uppercase no
+
+# Nombre d'echantillons a utiliser pour calculer la moyenne d'utilisation
+cpu_avg_samples 4
+net_avg_samples 4
+
+# Pour affichier les caracteres speciaux
+override_utf8_locale yes
+
+# Fonctionne uniquement avec la police Monospace
+use_spacer none
+
+TEXT
+${color1}${font StyleBats:size=12}//$font GENERAL${hr 3}
+
+${color1}IP Locale: $color1${addr wlp3s0}
+${color1}IP Publique : $color1${execi 1800 /home/$USER/.conky/ip.sh}
+${color1}RAM $color1$mem/$memmax ${color1}${membar}
+${color1}Swap $color1$swap/$swapmax ${color1}${swapbar}
+
+${color1}${font StyleBats:size=12}//$font CPU${hr 3}
+
+${color1}Core1 : $color1${cpu cpu1}% ${color1}${cpubar cpu1}
+${color1}Core2 : $color1${cpu cpu2}% ${color1}${cpubar cpu2}
+${color1}Core3 : $color1${cpu cpu3}% ${color1}${cpubar cpu3}
+${color1}Core4 : $color1${cpu cpu4}% ${color1}${cpubar cpu4}
+${color1}${cpugraph}
+
+${color1}${font StyleBats:size=12}//$font ESPACE DISQUE${hr 3}
+
+${color1}Root : $color1${fs_free /}/${fs_size /} $alignr${fs_used}
+${color1}${fs_bar /}
+${color1}Home : $color1${fs_free /home/$USER}/${fs_size /home/$USER} $alignr${fs_used /home/$USER}
+${color1}${fs_bar /home/$USER}
+${color1}Data : ${if_mounted /mnt/data}$color1${fs_free /mnt/data}/${fs_size /mnt/data} $alignr${fs_used /mnt/data}
+${color1}${fs_bar /mnt/data}${else}$color1 Non Monte $endif
+
+${color1}${font StyleBats:size=12}//$font UTILISATION CPU${hr 3}
+
+${color1}${top name 1} $alignr${top pid 1} ${top cpu 1}
+${color1}${top name 2} $alignr${top pid 2} ${top cpu 2}
+${color1}${top name 3} $alignr${top pid 3} ${top cpu 3}
+${color1}${top name 4} $alignr${top pid 4} ${top cpu 4}
+${color1}${top name 5} $alignr${top pid 5} ${top cpu 5}
+
+${color1}${font StyleBats:size=12}//$font UTILISATION MEMOIRE${hr 3}
+
+${color1}${top_mem name 1} $alignr${top_mem pid 1} ${top_mem mem 1}
+${color1}${top_mem name 2} $alignr${top_mem pid 2} ${top_mem mem 2}
+${color1}${top_mem name 3} $alignr${top_mem pid 3} ${top_mem mem 3}
+${color1}${top_mem name 4} $alignr${top_mem pid 4} ${top_mem mem 4}
+${color1}${top_mem name 5} $alignr${top_mem pid 5} ${top_mem mem 5}
